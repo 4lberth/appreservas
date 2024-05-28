@@ -44,6 +44,9 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('/admin/form', [AdminController::class, 'showForm'])->name('admin.form');
     Route::post('/admin/form', [AdminController::class, 'handleForm'])->name('admin.form.handle');
 });
+Route::resource('reservas', ReservaController::class)
+    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
 
